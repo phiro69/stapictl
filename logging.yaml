@@ -1,0 +1,37 @@
+version: 1
+formatters:
+  simple:
+    format: '%(asctime)s - %(levelname)s - %(message)s'
+    datefmt: '%Y-%m-%d %H:%M:%S'
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: INFO
+    formatter: simple
+    stream: ext://sys.stdout
+  file:
+    class: logging.handlers.RotatingFileHandler
+    level: INFO
+    formatter: simple
+    filename: stapictl.log
+    maxBytes: 104857600
+    backupCount: 10
+  email:
+    class: logging.handlers.SMTPHandler
+    level: ERROR
+    formatter: simple
+    mailhost:
+      - mail.gmail.com
+      - 25
+    fromaddr: noreply-kellydev@schoenhofen.us
+    toaddrs: kelly.schoenhofen@gmail.com
+    subject: stapictl ERROR
+loggers:
+  default:
+    level: DEBUG
+    handlers: [console, file]
+    # handlers: [console, file, email]
+    propagate: no
+root:
+  level: ERROR
+  handlers: [console]

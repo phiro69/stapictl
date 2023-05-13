@@ -1,0 +1,4 @@
+stapictl.yaml
+*.log
+.idea
+__pycache__/
